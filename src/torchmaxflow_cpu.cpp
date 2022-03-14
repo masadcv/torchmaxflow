@@ -242,7 +242,7 @@ torch::Tensor maxflow3d_cpu(const torch::Tensor &image, const torch::Tensor &pro
                         }
                         l2dis = l2distance(pval_v, qval_v, channel);
                     }
-                    n_weight = lambda * exp(-l2dis * l2dis / (2 * sigma * sigma));
+                    n_weight = lambda * exp(-(l2dis * l2dis) / (2 * sigma * sigma));
                     qIndex = dn * height * width + hn * width + wn;
                     g->add_edge(qIndex, pIndex, n_weight, n_weight);
 

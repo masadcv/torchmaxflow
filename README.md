@@ -33,7 +33,9 @@ For more usage examples see:
 
 **2D and 3D maxflow and interactive maxflow examples**: [`demo_maxflow.py`](./demo_maxflow.py) 
  
-
+## References
+- SimpleCRF's maxflow implementation: [https://github.com/HiLab-git/SimpleCRF](https://github.com/HiLab-git/SimpleCRF)
+- Yuri Boykov and Vladimir Kolmogorov's maxflow implementation: [https://pub.ist.ac.at/~vnk/software/maxflow-v3.04.src.zip](https://pub.ist.ac.at/~vnk/software/maxflow-v3.04.src.zip)
 ## Citation
 If you use this code in your research, then please consider citing:
 
@@ -41,7 +43,7 @@ If you use this code in your research, then please consider citing:
 >"ECONet: Efficient Convolutional Online Likelihood Network for Scribble-based Interactive Segmentation." 
 >arXiv preprint arXiv:2201.04584 (2022).
 
-BibTeX:
+<!-- BibTeX:
 ```
 @inproceedings{
 asad2022econet,
@@ -51,4 +53,4 @@ booktitle={Medical Imaging with Deep Learning},
 year={2022},
 url={https://openreview.net/forum?id=9xtE2AgD_Cc}
 }
-```
+``` -->

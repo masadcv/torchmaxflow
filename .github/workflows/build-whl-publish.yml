@@ -34,7 +34,7 @@ jobs:
       run: pip install --find-links=${{github.workspace}}/dist/ torchmaxflow
 
     - name: Test import
-      run: python -c "import torchmaxflow"
+      run: python -c "import torch; import torchmaxflow"
 
     - name: Install deps for demos
       run: pip install SimpleITK pillow matplotlib

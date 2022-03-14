@@ -50,6 +50,7 @@ jobs:
           python -m pip install "$tmp_dir"/torchmaxflow*.tar.gz
           python -c 'import torch; import torchmaxflow;' 2>&1 | grep -iv "unknown"
           python -c 'import torch; import torchmaxflow; print(torchmaxflow.__file__)'
+          python -m pip list | grep "torchmaxflow"
           python -m pip uninstall -y torchmaxflow
           # install from wheel
           # python -m pip install "$tmp_dir"/torchmaxflow*.whl

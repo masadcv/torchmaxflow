@@ -1,4 +1,4 @@
-name: release
+name: release-no-verify
 # generating and publishing release package artifacts from the main branch
 # based on release script for monai label: https://github.com/Project-MONAI/MONAILabel
 

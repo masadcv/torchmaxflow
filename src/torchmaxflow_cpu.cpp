@@ -280,7 +280,6 @@ torch::Tensor maxflow3d_cpu(const torch::Tensor &image, const torch::Tensor &pro
     }
     double flow = g->maxflow();
     // std::cout << "max flow: " << flow << std::endl;
-
     int idx = 0;
     for (int d = 0; d < depth; d++)
     {

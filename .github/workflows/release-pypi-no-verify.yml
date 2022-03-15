@@ -57,13 +57,15 @@ jobs:
           rm dist/torchmaxflow*.tar.gz
       - name: Publish distribution to Test PyPI
         if: ${{ github.event.inputs.test_py == 'true' }}
-        uses: pypa/gh-action-pypi-publish@master
+        uses: pypa/gh-action-pypi-publish@v1.5.0
         with:
+          user: __token__
           password: ${{ secrets.TEST_PYPI_API_TOKEN }}
           repository_url: https://test.pypi.org/legacy/
 
       - name: Publish distribution to PyPI
         if: ${{ github.event.inputs.main_py == 'true' }}
-        uses: pypa/gh-action-pypi-publish@master
+        uses: pypa/gh-action-pypi-publish@v1.5.0
         with:
+          user: __token__
           password: ${{ secrets.PYPI_API_TOKEN }}

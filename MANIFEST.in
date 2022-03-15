@@ -1,0 +1,3 @@
+include torchmaxflow/*h
+include torchmaxflow/*cpp
+include torchmaxflow/maxflow-v3.04.src/*

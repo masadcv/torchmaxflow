@@ -66,12 +66,12 @@ def omp_flags():
 
 def get_extensions():
     this_dir = os.path.dirname(os.path.abspath(__file__))
-    ext_dir = os.path.join(this_dir, "src")
+    ext_dir = os.path.join(this_dir, "torchmaxflow")
     include_dirs = [ext_dir]
 
     source_cpu = glob.glob(os.path.join(ext_dir, "**", "*.cpp"), recursive=True)
     source_cuda = glob.glob(os.path.join(ext_dir, "**", "*.cu"), recursive=True)
-
+    print(source_cpu)
     extension = None
     define_macros = [(f"{torch_parallel_backend()}", 1)]
     extra_compile_args = {}
@@ -107,7 +107,7 @@ def get_extensions():
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
-
+print(get_extensions())
 setup(
     name='torchmaxflow',
     version="0.0.1",
@@ -124,6 +124,6 @@ setup(
     ],
     cmdclass={"build_ext": BuildExtension}, #.with_options(no_python_abi_suffix=True)},
     packages=find_packages(exclude=("data", "docs", "examples", "scripts", "tests")),
-    zip_safe=False,
+    # zip_safe=False,
     ext_modules=get_extensions(),
 )

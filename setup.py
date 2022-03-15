@@ -119,7 +119,7 @@ setup(
     author_email="muhammad.asad@kcl.ac.uk",
     license="BSD-3-Clause License",
     classifiers=[
-        "License :: OSI Approved :: BSD-3-Clause License",
+        "License :: OSI Approved :: BSD License",
         "Programming Language :: Python :: 3",
     ],
     cmdclass={"build_ext": BuildExtension}, #.with_options(no_python_abi_suffix=True)},

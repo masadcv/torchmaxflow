@@ -105,9 +105,23 @@ def get_extensions():
     ]
     return ext_modules
 
+with open("README.md", "r") as fh:
+    long_description = fh.read()
+
 setup(
     name='torchmaxflow',
     version="0.0.1",
+    description="",
+    long_description=long_description,
+    long_description_content_type="text/markdown",
+    url="https://github.com/masadcv/torchmaxflow",
+    author="Muhammad Asad",
+    author_email="muhammad.asad@kcl.ac.uk",
+    license="BSD-3-Clause License",
+    classifiers=[
+        "License :: OSI Approved :: BSD-3-Clause License",
+        "Programming Language :: Python :: 3",
+    ],
     cmdclass={"build_ext": BuildExtension}, #.with_options(no_python_abi_suffix=True)},
     packages=find_packages(exclude=("data", "docs", "examples", "scripts", "tests")),
     zip_safe=False,

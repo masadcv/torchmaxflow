@@ -32,7 +32,7 @@ jobs:
           pip install -r requirements.txt
       - name: Build Package
         run: |
-          python setup.py sdist bdist_wheel
+          python setup.py sdist bdist_wheel --universal
 #       - name: Verify Package
 #         run: |
 #           tmp_dir=$(mktemp -d)

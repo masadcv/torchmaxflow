@@ -1,5 +1,4 @@
 # torchmaxflow: Max-flow/Min-cut in PyTorch for 2D images and 3D volumes
-**Warning: we have discovered the license for this project does not match with the source code used for MaxFlow. It is fine for usage in research projects, but restricted for commercial use. We are working on removing this dependency, in the meantime please bear this in mind before using torchmaxflow**
 
 Pytorch-based implementation of Max-flow/Min-cut based on the following paper:
 

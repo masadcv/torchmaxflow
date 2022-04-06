@@ -48,7 +48,7 @@
 //
 //  Modification made for torchmaxflow by Muhammad Asad (masadcv@gmail.com) from King's College London, UK:
 //  - CV_Assert() -> assert()
-//  - uchar -> u_char
+//  - uchar -> unsigned char
 //  - MIN() -> std::min()
 //M*/
 
@@ -79,7 +79,7 @@ private:
         int ts;
         int dist;
         TWeight weight;
-        u_char t;
+        unsigned char t;
     };
     class Edge
     {
@@ -201,7 +201,7 @@ TWeight GCGraph<TWeight>::maxFlow()
         Vtx* v, *u;
         int e0 = -1, ei = 0, ej = 0;
         TWeight minWeight, weight;
-        u_char vt;
+        unsigned char vt;
 
         // grow S & T search trees, find an edge connecting them
         while( first != nilNode )

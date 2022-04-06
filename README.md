@@ -29,14 +29,14 @@ $ python setup.py install
 ## Example outputs
 Maxflow2d
 
-![./figures/torchmaxflow_maxflow2d.png](./figures/torchmaxflow_maxflow2d.png)
+![./figures/torchmaxflow_maxflow2d.png](https://raw.githubusercontent.com/masadcv/torchmaxflow/main/figures/torchmaxflow_maxflow2d.png)
 
 Interactive maxflow2d
 
-![./figures/torchmaxflow_intmaxflow2d.png](./figures/torchmaxflow_intmaxflow2d.png)
+![./figures/torchmaxflow_intmaxflow2d.png](https://raw.githubusercontent.com/masadcv/torchmaxflow/main/figures/torchmaxflow_intmaxflow2d.png)
 
 
-![figures/figure_torchmaxflow.png](figures/figure_torchmaxflow.png)
+![figures/figure_torchmaxflow.png](https://raw.githubusercontent.com/masadcv/torchmaxflow/main/figures/figure_torchmaxflow.png)
 
 
 ## Example usage

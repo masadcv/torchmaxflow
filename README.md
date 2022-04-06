@@ -55,7 +55,7 @@ post_proc_label = torchmaxflow.maxflow(image, prob, lamda, sigma)
 
 For more usage examples see: 
 
-**2D and 3D maxflow and interactive maxflow examples**: [`demo_maxflow.py`](./demo_maxflow.py) 
+**2D and 3D maxflow and interactive maxflow examples**: [`demo_maxflow.py`](https://raw.githubusercontent.com/masadcv/torchmaxflow/main/demo_maxflow.py) 
  
 ## References
 - OpenCV's Graphcut implementation:[https://github.com/opencv/opencv/blob/2.4/modules/imgproc/src/gcgraph.hpp](https://github.com/opencv/opencv/blob/2.4/modules/imgproc/src/gcgraph.hpp)

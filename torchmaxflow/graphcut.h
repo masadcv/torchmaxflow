@@ -167,6 +167,8 @@ void GCGraph<TWeight>::addTermWeights( int i, TWeight sourceW, TWeight sinkW )
 template <class TWeight>
 TWeight GCGraph<TWeight>::maxFlow()
 {
+    assert(!vtcs.empty());
+    assert(!edges.empty());
     const int TERMINAL = -1, ORPHAN = -2;
     Vtx stub, *nilNode = &stub, *first = nilNode, *last = nilNode;
     int curr_ts = 0;

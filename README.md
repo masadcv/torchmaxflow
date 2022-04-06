@@ -33,13 +33,10 @@ Maxflow2d
 
 Interactive maxflow2d
 
-![./figures/torchmaxflow_maxflow2d.png](./figures/torchmaxflow_maxflow2d.png)
+![./figures/torchmaxflow_intmaxflow2d.png](./figures/torchmaxflow_intmaxflow2d.png)
 
-![./figures/2007_002094.jpg](./figures/2007_002094.jpg)
-![./figures/2007_002094_prob.png](./figures/2007_002094_prob.png)
-![./figures/2007_002094_seg.png](./figures/2007_002094_seg.png)
-![./figures/2007_002094_scrib.png](./figures/2007_002094_scrib.png)
-![./figures/2007_002094_intergc_1.png](./figures/2007_002094_intergc_1.png)
+
+![figures/figure_torchmaxflow.png](figures/figure_torchmaxflow.png)
 
 
 ## Example usage

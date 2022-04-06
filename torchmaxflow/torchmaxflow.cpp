@@ -1,8 +1,22 @@
 #include <torch/extension.h>
-#include <iostream>
 #include <vector>
 #include "torchmaxflow.h"
 #include "common.h"
+
+void check_shape_match(const torch::Tensor &in1, const torch::Tensor &in2, const int &dims)
+{
+    for(int i=0; i < dims; i++)
+    {
+        if(in1.size(2+i) != in2.size(2+i))
+        {
+            std::cout << "Tensor1 ";
+            print_shape(in1);
+            std::cout << "Tensor2 ";
+            print_shape(in2);
+            AT_ERROR("Error: shapes of input tensors do not match");
+        }
+    }
+}
 
 torch::Tensor maxflow(const torch::Tensor &image, const torch::Tensor &prob, const float &lambda, const float &sigma)
 {
@@ -35,12 +49,14 @@ torch::Tensor maxflow(const torch::Tensor &image, const torch::Tensor &prob, con
     // 2D case: 1 x C x H x W
     if (num_dims == 4)
     {
+        check_shape_match(image, prob, 2);
         return maxflow2d_cpu(image, prob, lambda, sigma);
     }
 
     // 3D case: 1 x C x D x H x W
     else if (num_dims == 5)
     {
+        check_shape_match(image, prob, 3);
         return maxflow3d_cpu(image, prob, lambda, sigma);
     }
 }
@@ -84,11 +100,15 @@ torch::Tensor maxflow_interactive(const torch::Tensor &image, torch::Tensor &pro
     // 2D case: 1 x C x H x W
     if (num_dims == 4)
     {
+        check_shape_match(image, prob, 2);
+        check_shape_match(image, seed, 2);
         return maxflow2d_cpu(image, prob, lambda, sigma);
     }
     // 3D case: 1 x C x D x H x W
     else
     {
+        check_shape_match(image, prob, 3);
+        check_shape_match(image, seed, 3);
         return maxflow3d_cpu(image, prob, lambda, sigma);
     }
 }

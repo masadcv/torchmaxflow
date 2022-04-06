@@ -38,7 +38,7 @@ jobs:
       # python -m pip install cibuildwheel==2.4.0
     
     - name: Build wheel
-      run: python setup.py bdist_wheel
+      run: python setup.py sdist bdist_wheel
           
     # - name: Build wheels
     #   run: python -m cibuildwheel --output-dir dist

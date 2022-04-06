@@ -62,7 +62,6 @@ For more usage examples see:
 ## References
 - OpenCV's Graphcut implementation:[https://github.com/opencv/opencv/blob/2.4/modules/imgproc/src/gcgraph.hpp](https://github.com/opencv/opencv/blob/2.4/modules/imgproc/src/gcgraph.hpp)
 - SimpleCRF's maxflow implementation: [https://github.com/HiLab-git/SimpleCRF](https://github.com/HiLab-git/SimpleCRF)
-- Yuri Boykov and Vladimir Kolmogorov's maxflow implementation: [https://pub.ist.ac.at/~vnk/software/maxflow-v3.04.src.zip](https://pub.ist.ac.at/~vnk/software/maxflow-v3.04.src.zip)
 
 <!-- BibTeX:
 ```

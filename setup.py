@@ -65,8 +65,9 @@ def omp_flags():
 
 
 def get_extensions():
-    this_dir = os.path.dirname(os.path.abspath(__file__))
-    ext_dir = os.path.join(this_dir, "torchmaxflow")
+#     this_dir = os.path.dirname(os.path.abspath(__file__))
+#     ext_dir = os.path.join(this_dir, "torchmaxflow")
+    ext_dir = "torchmaxflow"
     include_dirs = [ext_dir]
 
     source_cpu = glob.glob(os.path.join(ext_dir, "**", "*.cpp"), recursive=True)

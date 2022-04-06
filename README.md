@@ -58,10 +58,10 @@ For more usage examples see:
 **2D and 3D maxflow and interactive maxflow examples**: [`demo_maxflow.py`](https://raw.githubusercontent.com/masadcv/torchmaxflow/main/demo_maxflow.py) 
  
 ## References
-- OpenCV's Graphcut implementation:[https://github.com/opencv/opencv/blob/2.4/modules/imgproc/src/gcgraph.hpp](https://github.com/opencv/opencv/blob/2.4/modules/imgproc/src/gcgraph.hpp)
-- SimpleCRF's maxflow implementation: [https://github.com/HiLab-git/SimpleCRF](https://github.com/HiLab-git/SimpleCRF)
+- [OpenCV's Graphcut implementation](https://github.com/opencv/opencv/blob/4.x/modules/imgproc/include/opencv2/imgproc/detail/gcgraph.hpp)
+- [SimpleCRF's maxflow implementation](https://github.com/HiLab-git/SimpleCRF)
 
-This repository depends on the code for maxflow from OpenCV v2.4: [https://github.com/opencv/opencv/blob/2.4/modules/imgproc/src/gcgraph.hpp](https://github.com/opencv/opencv/blob/2.4/modules/imgproc/src/gcgraph.hpp), which has been included.
+This repository depends on the code for [maxflow from latest version of OpenCV](https://github.com/opencv/opencv/blob/4.x/modules/imgproc/include/opencv2/imgproc/detail/gcgraph.hpp), which has been included.
 
 <!-- BibTeX:
 ```

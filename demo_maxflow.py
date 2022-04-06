@@ -28,9 +28,9 @@ def demo_maxflow():
     toc = time.time()
     print("Time taken: {}".format(toc-tic))
     
-    plt.subplot(1,3,1); plt.axis('off'); plt.imshow(I);  plt.title('input image')
-    plt.subplot(1,3,2); plt.axis('off'); plt.imshow(fP);   plt.title('initial \n segmentation')
-    plt.subplot(1,3,3); plt.axis('off'); plt.imshow(lab); plt.title('CRF result')
+    plt.subplot(1,3,1); plt.axis('off'); plt.imshow(I);  plt.title('Input')
+    plt.subplot(1,3,2); plt.axis('off'); plt.imshow(fP);   plt.title('Initial Segmentation')
+    plt.subplot(1,3,3); plt.axis('off'); plt.imshow(lab); plt.title('Graphcut result')
     plt.show()
 
 def demo_interactive_maxflow():
@@ -54,11 +54,14 @@ def demo_interactive_maxflow():
     Iq = torch.from_numpy(Iq).unsqueeze(0).unsqueeze(0)
     Prob = torch.from_numpy(Prob).unsqueeze(0)
     Seed = torch.from_numpy(Seed).unsqueeze(0)
+    tic = time.time()
     lab = np.squeeze(torchmaxflow.maxflow_interactive(Iq, Prob, Seed, lamda, sigma).numpy())
+    toc = time.time()
+    print("Time taken: {}".format(toc-tic))
 
-    plt.subplot(1,3,1); plt.axis('off'); plt.imshow(I);  plt.title('input image')
-    plt.subplot(1,3,2); plt.axis('off'); plt.imshow(fP);   plt.title('initial \n segmentation')
-    plt.subplot(1,3,3); plt.axis('off'); plt.imshow(lab); plt.title('CRF result')
+    plt.subplot(1,3,1); plt.axis('off'); plt.imshow(I);  plt.title('Input')
+    plt.subplot(1,3,2); plt.axis('off'); plt.imshow(fP);   plt.title('Initial Segmentation')
+    plt.subplot(1,3,3); plt.axis('off'); plt.imshow(lab); plt.title('Graphcut result')
     plt.show()
 
 def demo_maxflow3d():
@@ -120,7 +123,10 @@ def test_interactive_max_flow3d():
     img_data = torch.from_numpy(img_data).unsqueeze(0).unsqueeze(0)
     Prob = torch.from_numpy(Prob).unsqueeze(0)
     Seed = torch.from_numpy(Seed).unsqueeze(0)
+    tic = time.time()
     lab = np.squeeze(torchmaxflow.maxflow_interactive(img_data, Prob, Seed, lamda, sigma).numpy())
+    toc = time.time()
+    print("Time taken: {}".format(toc-tic))
     lab_obj = sitk.GetImageFromArray(lab)
     lab_obj.CopyInformation(img_obj)
     sitk.WriteImage(lab_obj, save_name)

@@ -1,25 +1,6 @@
 #include <torch/extension.h>
 #include <vector>
-// #include <iostream>
 #include "graphcut.h"
-
-// void print_shape(torch::Tensor data)
-// {
-//     auto num_dims = data.dim();
-//     std::cout << "Shape: (";
-//     for (int dim = 0; dim < num_dims; dim++)
-//     {
-//         std::cout << data.size(dim);
-//         if (dim != num_dims - 1)
-//         {
-//             std::cout << ", ";
-//         }int
-//         else
-//         {
-//             std::cout << ")" << std::endl;
-//         }
-//     }
-// }
 
 // float l1distance(const float &in1, const float &in2)
 // {
@@ -65,6 +46,7 @@ float l2distance(const std::vector<float> &in1, const std::vector<float> &in2)
 torch::Tensor maxflow2d_cpu(const torch::Tensor &image, const torch::Tensor &prob, const float &lambda, const float &sigma)
 {
     // get input dimensions
+    const int batch = image.size(0);
     const int channel = image.size(1);
     const int height = image.size(2);
     const int width = image.size(3);
@@ -73,7 +55,7 @@ torch::Tensor maxflow2d_cpu(const torch::Tensor &image, const torch::Tensor &pro
     const int Yoff[2] = {0, -1};
 
     // prepare output
-    torch::Tensor label = torch::zeros_like(image);
+    torch::Tensor label = torch::zeros({batch, 1, height, width}, image.dtype());
 
     // get data accessors
     auto label_ptr = label.accessor<float, 4>();
@@ -173,6 +155,7 @@ torch::Tensor maxflow2d_cpu(const torch::Tensor &image, const torch::Tensor &pro
 torch::Tensor maxflow3d_cpu(const torch::Tensor &image, const torch::Tensor &prob, const float &lambda, const float &sigma)
 {
     // get input dimensions
+    const int batch = image.size(0);
     const int channel = image.size(1);
     const int depth = image.size(2);
     const int height = image.size(3);
@@ -183,7 +166,7 @@ torch::Tensor maxflow3d_cpu(const torch::Tensor &image, const torch::Tensor &pro
     const int Zoff[3] = {0, 0, -1};
 
     // prepare output
-    torch::Tensor label = torch::zeros_like(image);
+    torch::Tensor label = torch::zeros({batch, 1, depth, height, width}, image.dtype());
 
     // get data accessors
     auto label_ptr = label.accessor<float, 5>();

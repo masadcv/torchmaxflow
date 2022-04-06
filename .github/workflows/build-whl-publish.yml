@@ -85,11 +85,12 @@ jobs:
     needs:
     - build
     steps:
-    - uses: actions/checkout@v1
-    - name: Set up Python 3.8
-      uses: actions/setup-python@v2
+    
+    - name: Download all the dists
+      uses: actions/download-artifact@v2
       with:
-        python-version: 3.8
+        name: dist
+        path: dist/
 
     - name: Publish distribution to Test PyPI
       if: ${{ github.event.inputs.test_py == 'true' }}

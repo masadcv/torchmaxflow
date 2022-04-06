@@ -17,7 +17,7 @@ on:
         default: 'false'
 
 jobs:
-  build:
+  build_wheels:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -38,7 +38,7 @@ jobs:
       # python -m pip install cibuildwheel==2.4.0
     
     - name: Build wheel
-      run: python setup.py sdist bdist_wheel
+      run: python setup.py bdist_wheel
           
     # - name: Build wheels
     #   run: python -m cibuildwheel --output-dir dist
@@ -60,6 +60,53 @@ jobs:
     - name: Test import
       if: ${{ github.event.inputs.test_package == 'true' }}
       run: python -c "import torch; import torchmaxflow"
+
+#     - name: Publish distribution to Test PyPI
+#       if: ${{ github.event.inputs.test_py == 'true' }}
+#       uses: pypa/gh-action-pypi-publish@v1.5.0
+#       with:
+#         user: __token__
+#         password: ${{ secrets.TEST_PYPI_API_TOKEN }}
+#         repository_url: https://test.pypi.org/legacy/
+
+#     - name: Publish distribution to PyPI
+#       if: ${{ github.event.inputs.main_py == 'true' }}
+#       uses: pypa/gh-action-pypi-publish@v1.5.0
+#       with:
+#         user: __token__
+#         password: ${{ secrets.PYPI_API_TOKEN }}
+
+  build_sdist:
+    runs-on: ubuntu-18.04
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+
+    - name: Install dependencies
+      run: |
+        pip install wheel setuptools ninja
+        pip install -r requirements.txt
+      # python -m pip install cibuildwheel==2.4.0
+    
+    - name: Build sdist
+      run: python setup.py sdist
+          
+    # - name: Build wheels
+    #   run: python -m cibuildwheel --output-dir dist
+      # to supply options, put them in 'env', like:
+      # env:
+      #   CIBW_SOME_OPTION: value
+    
+    - name: Upload Python Dist
+      uses: actions/upload-artifact@v2
+      with:
+        name: dist
+        path: dist/
+        if-no-files-found: error
 
     - name: Publish distribution to Test PyPI
       if: ${{ github.event.inputs.test_py == 'true' }}

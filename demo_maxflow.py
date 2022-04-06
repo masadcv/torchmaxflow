@@ -28,9 +28,9 @@ def demo_maxflow():
     toc = time.time()
     print("Time taken: {}".format(toc-tic))
     
-    plt.subplot(1,3,1); plt.axis('off'); plt.imshow(I);  plt.title('input image')
-    plt.subplot(1,3,2); plt.axis('off'); plt.imshow(fP);   plt.title('initial \n segmentation')
-    plt.subplot(1,3,3); plt.axis('off'); plt.imshow(lab); plt.title('CRF result')
+    plt.subplot(1,3,1); plt.axis('off'); plt.imshow(I);  plt.title('Input')
+    plt.subplot(1,3,2); plt.axis('off'); plt.imshow(fP);   plt.title('Initial Segmentation')
+    plt.subplot(1,3,3); plt.axis('off'); plt.imshow(lab); plt.title('Graphcut result')
     plt.show()
 
 def demo_interactive_maxflow():
@@ -59,9 +59,9 @@ def demo_interactive_maxflow():
     toc = time.time()
     print("Time taken: {}".format(toc-tic))
 
-    plt.subplot(1,3,1); plt.axis('off'); plt.imshow(I);  plt.title('input image')
-    plt.subplot(1,3,2); plt.axis('off'); plt.imshow(fP);   plt.title('initial \n segmentation')
-    plt.subplot(1,3,3); plt.axis('off'); plt.imshow(lab); plt.title('CRF result')
+    plt.subplot(1,3,1); plt.axis('off'); plt.imshow(I);  plt.title('Input')
+    plt.subplot(1,3,2); plt.axis('off'); plt.imshow(fP);   plt.title('Initial Segmentation')
+    plt.subplot(1,3,3); plt.axis('off'); plt.imshow(lab); plt.title('Graphcut result')
     plt.show()
 
 def demo_maxflow3d():

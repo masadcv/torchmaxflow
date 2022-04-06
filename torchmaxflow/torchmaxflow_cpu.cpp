@@ -137,7 +137,8 @@ torch::Tensor maxflow2d_cpu(const torch::Tensor &image, const torch::Tensor &pro
         }
     }
 
-    float flow = g.maxFlow();
+    g.maxFlow();
+    // float flow = g.maxFlow();
     // std::cout << "max flow: " << flow << std::endl;
 
     int idx = 0;
@@ -255,7 +256,8 @@ torch::Tensor maxflow3d_cpu(const torch::Tensor &image, const torch::Tensor &pro
         }
     }
     
-    float flow = g.maxFlow();
+    g.maxFlow();
+    // float flow = g.maxFlow();
     // std::cout << "max flow: " << flow << std::endl;
 
     int idx = 0;
@@ -280,7 +282,6 @@ void add_interactive_seeds(torch::Tensor &prob, const torch::Tensor &seed, const
     //  "Interactive medical image segmentation using deep learning with image-specific fine tuning."
     //  IEEE TMI (2018).
 
-    const int channel = prob.size(1);
     if (num_dims == 4) // 2D
     {
         const int height = prob.size(2);

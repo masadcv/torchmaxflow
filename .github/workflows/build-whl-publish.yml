@@ -41,9 +41,9 @@ jobs:
     - name: Build wheel
       run: python setup.py bdist_wheel
       
-    - name: Build source dist
-      if: ${{ matrix.python-version == '3.8' && matrix.os == 'ubuntu-18.04'}}
-      run: python setup.py sdist
+#     - name: Build source dist
+#       if: ${{ matrix.python-version == '3.8' && matrix.os == 'ubuntu-18.04'}}
+#       run: python setup.py sdist
           
     # - name: Build wheels
     #   run: python -m cibuildwheel --output-dir dist
@@ -81,12 +81,36 @@ jobs:
 #         user: __token__
 #         password: ${{ secrets.PYPI_API_TOKEN }}
 
+  build_sdist:
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+
+    - name: Install dependencies
+      run: |
+        pip install wheel setuptools
+        pip install -r requirements.txt
+    
+    - name: Build source dist
+      run: python setup.py sdist
+    
+    - name: Upload Python Dist
+      uses: actions/upload-artifact@v2
+      with:
+        name: dist
+        path: dist/
+        if-no-files-found: error
+
   publish_pypi:
     runs-on: ubuntu-18.04
     needs:
     - build
+    - build_sdist
     steps:
-    
     - name: Download all the dists
       uses: actions/download-artifact@v2
       with:

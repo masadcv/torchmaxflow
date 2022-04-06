@@ -92,7 +92,7 @@ jobs:
         python-version: 3.8
 
     - name: Publish distribution to Test PyPI
-      if: ${{ github.event.inputs.test_py == 'true' && matrix.python-version == '3.8' && matrix.os == 'ubuntu-18.04' }}
+      if: ${{ github.event.inputs.test_py == 'true' }}
       uses: pypa/gh-action-pypi-publish@v1.5.0
       with:
         user: __token__
@@ -100,7 +100,7 @@ jobs:
         repository_url: https://test.pypi.org/legacy/
 
     - name: Publish distribution to PyPI
-      if: ${{ github.event.inputs.main_py == 'true' && matrix.python-version == '3.8' && matrix.os == 'ubuntu-18.04'}}
+      if: ${{ github.event.inputs.main_py == 'true' }}
       uses: pypa/gh-action-pypi-publish@v1.5.0
       with:
         user: __token__

@@ -146,7 +146,7 @@ torch::Tensor maxflow2d_cpu(const torch::Tensor &image, const torch::Tensor &pro
     {
         for (int w = 0; w < width; w++)
         {
-            label_ptr[0][0][h][w] = g.inSourceSegment(idx);
+            label_ptr[0][0][h][w] = g.inSourceSegment(idx) ? 1.0 : 0.0;
             idx++;
         }
     }
@@ -267,7 +267,7 @@ torch::Tensor maxflow3d_cpu(const torch::Tensor &image, const torch::Tensor &pro
         {
             for (int w = 0; w < width; w++)
             {
-                label_ptr[0][0][d][h][w] = g.inSourceSegment(idx);
+                label_ptr[0][0][d][h][w] = g.inSourceSegment(idx) ? 1.0 : 0.0;
                 idx++;
             }
         }

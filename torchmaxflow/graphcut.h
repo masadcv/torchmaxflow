@@ -38,13 +38,13 @@
 // the use of this software, even if advised of the possibility of such damage.
 //
 //
-//  This code is based on GraphCut implementation in OpenCV v2.4
-//  Original license in OpenCV 2.4 is BSD 3-Clause (included above), which is same as torchmaxflow license.
+//  This code is based on GraphCut implementation in latest version of OpenCV (v4.x)
+//  Original license in OpenCV 4.x is BSD 3-Clause (included above), which is same as torchmaxflow license.
 //  
-//  This file is specifically contained in the following location in OpenCV v2.4:
-//  https://github.com/opencv/opencv/blob/2.4/modules/imgproc/src/gcgraph.hpp
+//  This file is specifically contained in the following location in OpenCV v4.x:
+//  https://github.com/opencv/opencv/blob/4.x/modules/imgproc/include/opencv2/imgproc/detail/gcgraph.hpp
 //  specific version used: 
-//  https://github.com/opencv/opencv/blob/6b9ebcbf3d332f6963b2ab8c37d6a14223921e15/modules/imgproc/src/gcgraph.hpp 
+//  https://github.com/opencv/opencv/blob/199687a1c5b194481754d3efe14cb06a82efa805/modules/imgproc/include/opencv2/imgproc/detail/gcgraph.hpp 
 //
 //  Modification made for torchmaxflow by Muhammad Asad (masadcv@gmail.com) from King's College London, UK:
 //  - CV_Assert() -> assert()

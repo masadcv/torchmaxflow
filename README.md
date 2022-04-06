@@ -4,15 +4,43 @@ Pytorch-based implementation of Max-flow/Min-cut based on the following paper:
 
 - Boykov, Yuri, and Vladimir Kolmogorov. "An experimental comparison of min-cut/max-flow algorithms for energy minimization in vision." IEEE transactions on pattern analysis and machine intelligence 26.9 (2004): 1124-1137.
 
-This repository depends on the code for maxflow from: [https://pub.ist.ac.at/~vnk/software/maxflow-v3.04.src.zip](https://pub.ist.ac.at/~vnk/software/maxflow-v3.04.src.zip), which has been included.
+This repository depends on the code for maxflow from OpenCV v2.4: [https://github.com/opencv/opencv/blob/2.4/modules/imgproc/src/gcgraph.hpp](https://github.com/opencv/opencv/blob/2.4/modules/imgproc/src/gcgraph.hpp), which has been included. It has same license, i.e. BSD-3 Clause, as torchmaxflow.
+
+## Citation
+If you use this code in your research, then please consider citing:
+
+ **Asad, Muhammad, Lucas Fidon, and Tom Vercauteren. ["ECONet: Efficient Convolutional Online Likelihood Network for Scribble-based Interactive Segmentation."](https://openreview.net/pdf?id=9xtE2AgD_Cc) Medical Imaging with Deep Learning (MIDL), 2022.**
 
 ## Installation instructions
-
-`pip install git+https://github.com/masadcv/torchmaxflow`
-
-TODO:
-
 `pip install torchmaxflow`
+
+or 
+
+
+```
+# Clone and install from github repo
+
+$ git clone https://github.com/masadcv/torchmaxflow
+$ cd torchmaxflow
+$ pip install -r requirements.txt
+$ python setup.py install
+```
+
+## Example outputs
+Maxflow2d
+
+![./figures/torchmaxflow_maxflow2d.png](./figures/torchmaxflow_maxflow2d.png)
+
+Interactive maxflow2d
+
+![./figures/torchmaxflow_maxflow2d.png](./figures/torchmaxflow_maxflow2d.png)
+
+![./figures/2007_002094.jpg](./figures/2007_002094.jpg)
+![./figures/2007_002094_prob.png](./figures/2007_002094_prob.png)
+![./figures/2007_002094_seg.png](./figures/2007_002094_seg.png)
+![./figures/2007_002094_scrib.png](./figures/2007_002094_scrib.png)
+![./figures/2007_002094_intergc_1.png](./figures/2007_002094_intergc_1.png)
+
 
 ## Example usage
 
@@ -35,14 +63,9 @@ For more usage examples see:
 **2D and 3D maxflow and interactive maxflow examples**: [`demo_maxflow.py`](./demo_maxflow.py) 
  
 ## References
+- OpenCV's Graphcut implementation:[https://github.com/opencv/opencv/blob/2.4/modules/imgproc/src/gcgraph.hpp](https://github.com/opencv/opencv/blob/2.4/modules/imgproc/src/gcgraph.hpp)
 - SimpleCRF's maxflow implementation: [https://github.com/HiLab-git/SimpleCRF](https://github.com/HiLab-git/SimpleCRF)
 - Yuri Boykov and Vladimir Kolmogorov's maxflow implementation: [https://pub.ist.ac.at/~vnk/software/maxflow-v3.04.src.zip](https://pub.ist.ac.at/~vnk/software/maxflow-v3.04.src.zip)
-## Citation
-If you use this code in your research, then please consider citing:
-
-> Asad, Muhammad, Lucas Fidon, and Tom Vercauteren. 
->"ECONet: Efficient Convolutional Online Likelihood Network for Scribble-based Interactive Segmentation." 
->arXiv preprint arXiv:2201.04584 (2022).
 
 <!-- BibTeX:
 ```

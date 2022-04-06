@@ -4,8 +4,6 @@ Pytorch-based implementation of Max-flow/Min-cut based on the following paper:
 
 - Boykov, Yuri, and Vladimir Kolmogorov. "An experimental comparison of min-cut/max-flow algorithms for energy minimization in vision." IEEE transactions on pattern analysis and machine intelligence 26.9 (2004): 1124-1137.
 
-This repository depends on the code for maxflow from OpenCV v2.4: [https://github.com/opencv/opencv/blob/2.4/modules/imgproc/src/gcgraph.hpp](https://github.com/opencv/opencv/blob/2.4/modules/imgproc/src/gcgraph.hpp), which has been included. It has same license, i.e. BSD-3 Clause, as torchmaxflow.
-
 ## Citation
 If you use this code in your research, then please consider citing:
 
@@ -62,6 +60,8 @@ For more usage examples see:
 ## References
 - OpenCV's Graphcut implementation:[https://github.com/opencv/opencv/blob/2.4/modules/imgproc/src/gcgraph.hpp](https://github.com/opencv/opencv/blob/2.4/modules/imgproc/src/gcgraph.hpp)
 - SimpleCRF's maxflow implementation: [https://github.com/HiLab-git/SimpleCRF](https://github.com/HiLab-git/SimpleCRF)
+
+This repository depends on the code for maxflow from OpenCV v2.4: [https://github.com/opencv/opencv/blob/2.4/modules/imgproc/src/gcgraph.hpp](https://github.com/opencv/opencv/blob/2.4/modules/imgproc/src/gcgraph.hpp), which has been included.
 
 <!-- BibTeX:
 ```

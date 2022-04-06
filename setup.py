@@ -111,7 +111,7 @@ with open("README.md", "r") as fh:
 print(get_extensions())
 setup(
     name='torchmaxflow',
-    version="0.0.3rc1",
+    version="0.0.3rc2",
     description="",
     long_description=long_description,
     long_description_content_type="text/markdown",

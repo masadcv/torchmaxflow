@@ -6,9 +6,13 @@ on:
       test_py:
         description: 'Publish package to test PY Repository'
         required: true
-        default: 'true'
+        default: 'false'
       main_py:
         description: 'Publish package to main PY Repository'
+        required: true
+        default: 'false'
+      test_package:
+        description: 'Test package within workflow'
         required: true
         default: 'false'
 
@@ -42,19 +46,21 @@ jobs:
       # to supply options, put them in 'env', like:
       # env:
       #   CIBW_SOME_OPTION: value
-
-    - name: Install software
-      run: pip install --find-links=${{github.workspace}}/dist/ torchmaxflow
-
-    - name: Test import
-      run: python -c "import torch; import torchmaxflow"
-
+    
     - name: Upload Python wheel
       uses: actions/upload-artifact@v2
       with:
         name: Python wheel
         path: ${{github.workspace}}/dist/torchmaxflow-*.whl
         if-no-files-found: error
+
+    - name: Install software
+      if: ${{ github.event.inputs.test_package == 'true' }}
+      run: pip install --find-links=${{github.workspace}}/dist/ torchmaxflow
+
+    - name: Test import
+      if: ${{ github.event.inputs.test_package == 'true' }}
+      run: python -c "import torch; import torchmaxflow"
 
     - name: Publish distribution to Test PyPI
       if: ${{ github.event.inputs.test_py == 'true' }}

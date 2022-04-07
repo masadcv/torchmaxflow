@@ -53,9 +53,13 @@ def demo_interactive_maxflow():
     toc = time.time()
     print("Time taken: {}".format(toc-tic))
 
-    plt.subplot(1,3,1); plt.axis('off'); plt.imshow(I);  plt.title('Input')
-    plt.subplot(1,3,2); plt.axis('off'); plt.imshow(fP);   plt.title('Initial Segmentation')
-    plt.subplot(1,3,3); plt.axis('off'); plt.imshow(lab); plt.title('Graphcut result')
+    # scribbles display - remove foreground
+    S[S == 85] = 0  
+
+    plt.subplot(1,4,1); plt.axis('off'); plt.imshow(I);  plt.title('Input')
+    plt.subplot(1,4,2); plt.axis('off'); plt.imshow(fP);   plt.title('Initial Segmentation')
+    plt.subplot(1,4,3); plt.axis('off'); plt.imshow(S);   plt.title('User-scribbles')
+    plt.subplot(1,4,4); plt.axis('off'); plt.imshow(lab); plt.title('Graphcut result')
     plt.show()
 
 def demo_maxflow3d():

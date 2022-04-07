@@ -1,7 +1,6 @@
 #pragma once
 
 #include <torch/extension.h>
-#include <vector>
 #include "common.h"
 
 torch::Tensor maxflow2d_cpu(

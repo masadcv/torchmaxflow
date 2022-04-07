@@ -20,7 +20,7 @@ void print_shape(const torch::Tensor &data)
     }
 }
 
-void check_shape_match(const torch::Tensor &in1, const torch::Tensor &in2, const int &dims)
+void check_spatial_shape_match(const torch::Tensor &in1, const torch::Tensor &in2, const int &dims)
 {
     if (in1.dim() != in2.dim())
     {
@@ -45,7 +45,7 @@ void check_cpu(const torch::Tensor &in)
 {
     if (in.is_cuda())
     {
-        throw std::runtime_error("Library currently does not support CUDA, please pass CPU tensors as mytensor.cpu().");
+        throw std::runtime_error("torchmaxflow currently does not support CUDA, please pass CPU tensors as mytensor.cpu().");
     }
 }
 
@@ -53,7 +53,7 @@ void check_single_batch(const torch::Tensor &in)
 {
     if (in.size(0) != 1)
     {
-        throw std::runtime_error("Library currently only supports single batch input.");
+        throw std::runtime_error("torchmaxflow currently only supports single batch input.");
     }
 }
 
@@ -61,38 +61,44 @@ void check_binary_channels(const torch::Tensor &in)
 {
     if (in.size(1) != 2)
     {
-        throw std::runtime_error("Library currently only supports binary probability.");
+        throw std::runtime_error("torchmaxflow currently only supports binary probability.");
     }
 }
 
 void check_input_maxflow(const torch::Tensor &image, const torch::Tensor &prob, const int &num_dims)
 {
-    // check input dimensions
+    // check tensors cpu
     check_cpu(image);
     check_cpu(prob);
     
+    // check batch==1
     check_single_batch(image);
     check_single_batch(prob);
 
+    // check channels==2 for prob
     check_binary_channels(prob);
 
-    check_shape_match(image, prob, num_dims-2);    
+    // check spatial shapes match
+    check_spatial_shape_match(image, prob, num_dims-2);    
 }
 
 void check_input_maxflow_interactive(const torch::Tensor &image, const torch::Tensor &prob, const torch::Tensor &seed, const int &num_dims)
 {
-    // check input dimensions
+    // check tensor cpu
     check_cpu(image);
     check_cpu(prob);
     check_cpu(seed);
     
+    // check batch==1
     check_single_batch(image);
     check_single_batch(prob);
     check_single_batch(seed);
 
+    // check channels==2 for prob and seeds
     check_binary_channels(prob);
     check_binary_channels(seed);
 
-    check_shape_match(image, prob, num_dims-2);    
-    check_shape_match(image, seed, num_dims-2);    
+    // check spatial shapes match
+    check_spatial_shape_match(image, prob, num_dims-2);    
+    check_spatial_shape_match(image, seed, num_dims-2);    
 }

@@ -1,5 +1,4 @@
 #include <torch/extension.h>
-#include <vector>
 #include "torchmaxflow.h"
 #include "common.h"
 

@@ -10,13 +10,11 @@ import torchmaxflow
 def demo_maxflow():
     I = Image.open('data/brain.png')
     Iq = np.asarray(I.convert('L'), np.float32)
-    # Iq = np.asarray(I, np.float32)
     P = np.asarray(Image.open('data/brain_mask.png').convert('L'), np.float32) / 255
 
     fP = 0.5 + (P - 0.5) * 0.8
     bP = 1.0 - fP
     Prob = np.asarray([bP, fP])
-    # Prob = np.transpose(Prob, [1, 2, 0])
     lamda = 20.0  
     sigma = 10.0
 
@@ -36,18 +34,14 @@ def demo_maxflow():
 def demo_interactive_maxflow():
     I = Image.open('data/brain.png')
     Iq = np.asarray(I.convert('L'), np.float32)
-    # Iq = np.asarray(I, np.float32)
     P = np.asarray(Image.open('data/brain_mask.png').convert('L'), np.float32) / 255
-    # Iq = np.transpose(Iq, [2, 0, 1])
 
     fP = 0.5 + (P - 0.5) * 0.8
     bP = 1.0 - fP
     Prob = np.asarray([bP, fP])
-    # Prob = np.transpose(Prob, [1, 2, 0])
 
     S  = np.asarray(Image.open('data/brain_scrb.png').convert('L'))
     Seed = np.asarray([S == 255, S == 170], np.float32)
-    # Seed = np.transpose(Seed, [1, 2, 0])
 
     lamda = 30.0  
     sigma = 8.0
@@ -78,7 +72,6 @@ def demo_maxflow3d():
     fP = 0.5 + (prob_data - 0.5) * 0.8
     bP = 1.0 - fP
     Prob = np.asarray([bP, fP])
-    # Prob = np.transpose(Prob, [1, 2, 3, 0])
 
     lamda = 10.0
     sigma = 15.0
@@ -111,12 +104,10 @@ def test_interactive_max_flow3d():
     fP = 0.5 + (prob_data - 0.5) * 0.8
     bP = 1.0 - fP
     Prob = np.asarray([bP, fP])
-    # Prob = np.transpose(Prob, [1, 2, 3, 0])
 
     seed_obj  = sitk.ReadImage(seed_name)
     seed_data = sitk.GetArrayFromImage(seed_obj)
     Seed = np.asarray([seed_data == 2, seed_data == 3], np.float32)
-    # Seed = np.transpose(Seed, [1, 2, 3, 0])
 
     lamda = 10.0
     sigma = 15.0

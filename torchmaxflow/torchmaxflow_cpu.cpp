@@ -65,9 +65,7 @@ torch::Tensor maxflow2d_cpu(const torch::Tensor &image, const torch::Tensor &pro
     // prepare graph
     // initialise with graph(num of nodes, num of edges)
     GCGraph<float> g(height * width, 2 * height * width);
-    
-    // define max weight value
-    float max_weight = -100000;
+
     float pval, qval, l2dis, n_weight, s_weight, t_weight, prob_bg, prob_fg;
     int pIndex, qIndex;
     std::vector<float> pval_v(channel);
@@ -104,13 +102,17 @@ torch::Tensor maxflow2d_cpu(const torch::Tensor &image, const torch::Tensor &pro
                     pval_v[c_i] = image_ptr[0][c_i][h][w];
                 }
             }
+
             pIndex = h * width + w;
             for (int i = 0; i < 2; i++)
             {
                 const int hn = h + Xoff[i];
                 const int wn = w + Yoff[i];
+                
                 if (hn < 0 || wn < 0)
+                {
                     continue;
+                }
 
                 if (channel == 1)
                 {
@@ -128,11 +130,6 @@ torch::Tensor maxflow2d_cpu(const torch::Tensor &image, const torch::Tensor &pro
                 n_weight = lambda * exp(-(l2dis * l2dis) / (2 * sigma * sigma));
                 qIndex = hn * width + wn;
                 g.addEdges(qIndex, pIndex, n_weight, n_weight);
-
-                if (n_weight > max_weight)
-                {
-                    max_weight = n_weight;
-                }
             }
         }
     }
@@ -178,8 +175,6 @@ torch::Tensor maxflow3d_cpu(const torch::Tensor &image, const torch::Tensor &pro
     // initialise with graph(num of nodes, num of edges)
     GCGraph<float> g(depth * height * width, 2 * depth * height * width);
 
-    // define max weight value
-    float max_weight = -100000;
     float pval, qval, l2dis, n_weight, s_weight, t_weight, prob_bg, prob_fg;
     int pIndex, qIndex;
     std::vector<float> pval_v(channel);
@@ -220,15 +215,18 @@ torch::Tensor maxflow3d_cpu(const torch::Tensor &image, const torch::Tensor &pro
                         pval_v[c_i] = image_ptr[0][c_i][d][h][w];
                     }
                 }
-                pIndex = d * height * width + h * width + w;
 
+                pIndex = d * height * width + h * width + w;
                 for (int i = 0; i < 3; i++)
                 {
                     const int dn = d + Xoff[i];
                     const int hn = h + Yoff[i];
                     const int wn = w + Zoff[i];
+
                     if (dn < 0 || hn < 0 || wn < 0)
+                    {
                         continue;
+                    }
 
                     if (channel == 1)
                     {
@@ -246,16 +244,11 @@ torch::Tensor maxflow3d_cpu(const torch::Tensor &image, const torch::Tensor &pro
                     n_weight = lambda * exp(-(l2dis * l2dis) / (2 * sigma * sigma));
                     qIndex = dn * height * width + hn * width + wn;
                     g.addEdges(qIndex, pIndex, n_weight, n_weight);
-
-                    if (n_weight > max_weight)
-                    {
-                        max_weight = n_weight;
-                    }
                 }
             }
         }
     }
-    
+
     g.maxFlow();
     // float flow = g.maxFlow();
     // std::cout << "max flow: " << flow << std::endl;

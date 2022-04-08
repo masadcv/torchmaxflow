@@ -37,10 +37,10 @@ jobs:
     - name: Install software
       if: ${{ github.event.inputs.test_package == 'true' }}
       run: |
-        ls 
+        echo "Folder contents:" 
         ls ${{github.workspace}}/dist/
-        ls torchmaxflow/dist
-        pip install --find-links=${{github.workspace}}/dist/ torchmaxflow
+        echo
+        pip install --no-index --find-links=${{github.workspace}}/dist/ torchmaxflow
 
     - name: Test import
       if: ${{ github.event.inputs.test_package == 'true' }}
@@ -74,10 +74,9 @@ jobs:
     - name: Install software
       if: ${{ github.event.inputs.test_package == 'true' }}
       run: |
-        ls 
+        echo "Folder contents:"
         ls ${{github.workspace}}/dist/
-        ls torchmaxflow/dist
-        pip install --find-links=${{github.workspace}}/dist/ torchmaxflow
+        pip install --no-index --find-links=${{github.workspace}}/dist/ torchmaxflow
 
     - name: Test import
       if: ${{ github.event.inputs.test_package == 'true' }}

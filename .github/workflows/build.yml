@@ -37,9 +37,7 @@ jobs:
     - name: Install software
       if: ${{ github.event.inputs.test_package == 'true' }}
       run: |
-        echo "Folder contents:" 
-        ls ${{github.workspace}}/dist/
-        echo
+        pip install numpy # install to get rid of warning
         pip install --no-index --find-links=${{github.workspace}}/dist/ torchmaxflow
 
     - name: Test import
@@ -74,9 +72,8 @@ jobs:
     - name: Install software
       if: ${{ github.event.inputs.test_package == 'true' }}
       run: |
-        echo "Folder contents:"
-        ls ${{github.workspace}}/dist/
-        pip install --no-index --find-links=${{github.workspace}}/dist/ torchmaxflow
+        pip install numpy # install to get rid of warning
+        pip install --find-links=${{github.workspace}}/dist/ torchmaxflow
 
     - name: Test import
       if: ${{ github.event.inputs.test_package == 'true' }}

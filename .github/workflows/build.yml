@@ -47,9 +47,13 @@ jobs:
         pip install numpy # install to get rid of warning
         pip install --no-index --find-links=${{github.workspace}}/dist/ torchmaxflow
 
-    - name: Test import
+    - name: Test import anhd 2D/3D case
       if: ${{ github.event.inputs.test_package == 'true' }}
-      run: python -c "import torch; import torchmaxflow"
+      run: |
+        # 2D test
+        python -c "import torch; import torchmaxflow; torchmaxflow.maxflow(torch.zeros(1, 1, 128, 128), torch.zeros(1, 2, 128, 128), 1.0, 1.0)"
+        # 3D test
+        python -c "import torch; import torchmaxflow; torchmaxflow.maxflow(torch.zeros(1, 1, 128, 128, 128), torch.zeros(1, 2, 128, 128, 128), 1.0, 1.0)"
       
     - name: Upload Python Dist
       if: ${{ github.event.inputs.save_artifacts == 'true' }}
@@ -82,9 +86,13 @@ jobs:
         pip install numpy # install to get rid of warning
         pip install ${{github.workspace}}/dist/torchmaxflow*.tar.gz
 
-    - name: Test import
+    - name: Test import and 2D/3D case
       if: ${{ github.event.inputs.test_package == 'true' }}
-      run: python -c "import torch; import torchmaxflow"
+      run: |
+        # 2D test
+        python -c "import torch; import torchmaxflow; torchmaxflow.maxflow(torch.zeros(1, 1, 128, 128), torch.zeros(1, 2, 128, 128), 1.0, 1.0)"
+        # 3D test
+        python -c "import torch; import torchmaxflow; torchmaxflow.maxflow(torch.zeros(1, 1, 128, 128, 128), torch.zeros(1, 2, 128, 128, 128), 1.0, 1.0)"
       
     - name: Upload Python Dist
       if: ${{ github.event.inputs.save_artifacts == 'true' }}

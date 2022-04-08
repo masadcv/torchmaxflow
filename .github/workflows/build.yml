@@ -5,13 +5,13 @@ on:
     inputs:
       test_package:
         description: 'Test package within workflow'
-        required: false
+        required: true
         default: 'false'
       save_artifacts:
-        description: 'Save artifacts'
-        required: false
+        description: 'Save artifacts from build'
+        required: true
         default: 'false'
-
+        
 jobs:
   build_wheel_test:
     runs-on: ${{ matrix.os }}

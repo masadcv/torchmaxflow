@@ -12,7 +12,7 @@ on:
       test_package:
         description: 'Test package within workflow'
         required: true
-        default: 'false'
+        default: 'true'
       save_artifacts:
         description: 'Save artifacts from build'
         required: true

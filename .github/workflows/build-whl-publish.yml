@@ -40,11 +40,7 @@ jobs:
     
     - name: Build wheel
       run: python setup.py bdist_wheel
-      
-#     - name: Build source dist
-#       if: ${{ matrix.python-version == '3.8' && matrix.os == 'ubuntu-18.04'}}
-#       run: python setup.py sdist
-          
+             
     # - name: Build wheels
     #   run: python -m cibuildwheel --output-dir dist
       # to supply options, put them in 'env', like:
@@ -65,21 +61,6 @@ jobs:
     - name: Test import
       if: ${{ github.event.inputs.test_package == 'true' }}
       run: python -c "import torch; import torchmaxflow"
-
-#     - name: Publish distribution to Test PyPI
-#       if: ${{ github.event.inputs.test_py == 'true' && matrix.python-version == '3.8' && matrix.os == 'ubuntu-18.04' }}
-#       uses: pypa/gh-action-pypi-publish@v1.5.0
-#       with:
-#         user: __token__
-#         password: ${{ secrets.TEST_PYPI_API_TOKEN }}
-#         repository_url: https://test.pypi.org/legacy/
-
-#     - name: Publish distribution to PyPI
-#       if: ${{ github.event.inputs.main_py == 'true' && matrix.python-version == '3.8' && matrix.os == 'ubuntu-18.04'}}
-#       uses: pypa/gh-action-pypi-publish@v1.5.0
-#       with:
-#         user: __token__
-#         password: ${{ secrets.PYPI_API_TOKEN }}
 
   build_sdist:
     runs-on: ubuntu-18.04

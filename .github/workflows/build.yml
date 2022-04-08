@@ -7,7 +7,7 @@ on:
         description: 'Test package within workflow'
         required: false
         default: 'false'
-     save_artifacts:
+      save_artifacts:
         description: 'Save artifacts'
         required: false
         default: 'false'

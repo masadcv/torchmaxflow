@@ -35,7 +35,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        pip install wheel setuptools ninja
+        pip install wheel setuptools
         pip install -r requirements.txt
       # python -m pip install cibuildwheel==2.4.0
     

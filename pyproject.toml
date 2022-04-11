@@ -2,7 +2,6 @@
 requires=[
     "setuptools",
     "torch==1.11.0",
-    "wheel",
-    "ninja"
+    "wheel"
 ]
 build-backend = "setuptools.build_meta"

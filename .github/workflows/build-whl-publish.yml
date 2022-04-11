@@ -22,7 +22,7 @@ jobs:
     strategy:
       matrix:
         os: [windows-2019, macos-10.15]
-        python-version: [3.6, 3.7, 3.8, 3.9]
+        python-version: [3.7, 3.8, 3.9]
         # removed macos to all building package from src
         # removed ubuntu from above due to many_linux issues with pytorch->pypi
         # os: [windows-2019, ubuntu-18.04, macos-10.15]

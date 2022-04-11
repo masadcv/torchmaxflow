@@ -121,7 +121,7 @@ with open("requirements.txt", "r") as fp:
 
 setup(
     name="torchmaxflow",
-    version="0.0.5",
+    version="0.0.6rc1",
     description="torchmaxflow: Max-flow/Min-cut in PyTorch for 2D images and 3D volumes",
     long_description=long_description,
     long_description_content_type="text/markdown",

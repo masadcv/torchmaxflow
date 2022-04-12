@@ -3,7 +3,7 @@
 [![CI Build](https://github.com/masadcv/torchmaxflow/actions/workflows/build.yml/badge.svg)](https://github.com/masadcv/torchmaxflow/actions/workflows/build.yml)
 [![PyPI version](https://badge.fury.io/py/torchmaxflow.svg)](https://badge.fury.io/py/torchmaxflow)
 <img src="https://img.shields.io/badge/Python-3.6%20|%203.7%20|%203.8%20|%203.9-3776ab.svg"/>
-<img src="https://img.shields.io/badge/PyTorch-%3E%3D%201.6-brightgreen.svg"/>
+<img src="https://img.shields.io/badge/PyTorch-%3E%3D%201.10-brightgreen.svg"/>
 
 Pytorch-based implementation of Max-flow/Min-cut based on the following paper:
 

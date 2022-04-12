@@ -18,29 +18,11 @@ on:
 
 jobs:
   build:
-    name: Build Wheels Using Torch Extension Builder
     uses: charliebudd/torch-extension-builder/.github/workflows/build-pytorch-extension-wheels.yml@main
     with:
-        python-versions: "[3.6, 3.7, 3.8]"
-        pytorch-versions: "[1.9, '1.10']"
-        cuda-versions: "[10.2, 11.3]"
-      
-
-    - name: Upload Python Dist
-      uses: actions/upload-artifact@v2
-      with:
-        name: dist
-        path: dist/
-        if-no-files-found: error
-
-    - name: Install software
-      if: ${{ github.event.inputs.test_package == 'true' }}
-      run: pip install --find-links=${{github.workspace}}/dist/ torchmaxflow
-
-    - name: Test import
-      if: ${{ github.event.inputs.test_package == 'true' }}
-      run: python -c "import torch; import torchmaxflow"
-
+      python-versions: "[3.6, 3.7, 3.8]"
+      pytorch-versions: "[1.9, '1.10']"
+      cuda-versions: "[10.2, 11.3]"
 
   build_sdist:
     runs-on: ubuntu-18.04

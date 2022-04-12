@@ -7,7 +7,7 @@ import warnings
 import pkg_resources
 from setuptools import find_packages, setup
 
-# FORCE_CUDA = os.getenv("FORCE_CUDA", "0") == "1"
+# FORCE_CUDA = os.getenv("FORCE_CUDA", "0") == "1" 
 
 BUILD_CPP = BUILD_CUDA = False
 TORCH_VERSION = 0
@@ -21,22 +21,16 @@ try:
     from torch.utils.cpp_extension import CUDA_HOME, CUDAExtension
 
     # CUDA not currently supported
-    BUILD_CUDA = (
-        False  # (CUDA_HOME is not None) if torch.cuda.is_available() else FORCE_CUDA
-    )
+    BUILD_CUDA = False #(CUDA_HOME is not None) if torch.cuda.is_available() else FORCE_CUDA
 
     _pt_version = pkg_resources.parse_version(torch.__version__)._version.release
     if _pt_version is None or len(_pt_version) < 3:
         raise AssertionError("unknown torch version")
-    TORCH_VERSION = (
-        int(_pt_version[0]) * 10000 + int(_pt_version[1]) * 100 + int(_pt_version[2])
-    )
+    TORCH_VERSION = int(_pt_version[0]) * 10000 + int(_pt_version[1]) * 100 + int(_pt_version[2])
 except (ImportError, TypeError, AssertionError, AttributeError) as e:
     warnings.warn(f"extension build skipped: {e}")
 finally:
-    print(
-        f"BUILD_CPP={BUILD_CPP}, BUILD_CUDA={BUILD_CUDA}, TORCH_VERSION={TORCH_VERSION}."
-    )
+    print(f"BUILD_CPP={BUILD_CPP}, BUILD_CUDA={BUILD_CUDA}, TORCH_VERSION={TORCH_VERSION}.")
 
 
 def torch_parallel_backend():
@@ -71,8 +65,8 @@ def omp_flags():
 
 
 def get_extensions():
-    #     this_dir = os.path.dirname(os.path.abspath(__file__))
-    #     ext_dir = os.path.join(this_dir, "torchmaxflow")
+#     this_dir = os.path.dirname(os.path.abspath(__file__))
+#     ext_dir = os.path.join(this_dir, "torchmaxflow")
     ext_dir = "torchmaxflow"
     include_dirs = [ext_dir]
 
@@ -115,10 +109,7 @@ def get_extensions():
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
-
-with open("requirements.txt", "r") as fp:
-    install_requires = fp.read().splitlines()
-
+print(get_extensions())
 setup(
     name="torchmaxflow",
     version="0.0.6rc1",
@@ -133,10 +124,7 @@ setup(
         "License :: OSI Approved :: BSD License",
         "Programming Language :: Python :: 3",
     ],
-    install_requires=install_requires,
-    cmdclass={
-        "build_ext": BuildExtension
-    },
+    cmdclass={"build_ext": BuildExtension}, #.with_options(no_python_abi_suffix=True)},
     packages=find_packages(exclude=("data", "docs", "examples", "scripts", "tests")),
     # zip_safe=False,
     ext_modules=get_extensions(),

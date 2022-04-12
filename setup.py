@@ -94,6 +94,9 @@ def get_extensions():
     if extension is None or not sources:
         return []  # compile nothing
 
+    # compile release
+    extra_compile_args["cxx"] += "-g0"
+
     ext_modules = [
         extension(
             name="torchmaxflow",

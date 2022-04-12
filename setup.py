@@ -95,7 +95,7 @@ def get_extensions():
         return []  # compile nothing
 
     # compile release
-    extra_compile_args["cxx"] += "-g0"
+    extra_compile_args["cxx"] += ["-g0"]
 
     ext_modules = [
         extension(

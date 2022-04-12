@@ -110,6 +110,11 @@ def get_extensions():
 with open("README.md", "r") as fh:
     long_description = fh.read()
 print(get_extensions())
+
+with open("requirements.txt", "r") as fp:
+    install_requires = fp.read().splitlines()
+    
+
 setup(
     name="torchmaxflow",
     version="0.0.6rc1",
@@ -124,6 +129,7 @@ setup(
         "License :: OSI Approved :: BSD License",
         "Programming Language :: Python :: 3",
     ],
+    install_requires=install_requires,
     cmdclass={"build_ext": BuildExtension}, #.with_options(no_python_abi_suffix=True)},
     packages=find_packages(exclude=("data", "docs", "examples", "scripts", "tests")),
     # zip_safe=False,

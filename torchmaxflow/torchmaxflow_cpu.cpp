@@ -178,7 +178,7 @@ torch::Tensor maxflow2d_cpu(const torch::Tensor &image, const torch::Tensor &pro
     return label;
 }
 
-torch::Tensor maxflow3d_cpu(const torch::Tensor &image, const torch::Tensor &prob, const float &lambda, const float &sigma)
+torch::Tensor maxflow3d_cpu(const torch::Tensor &image, const torch::Tensor &prob, const float &lambda, const float &sigma, const int &connectivity)
 {
     // get input dimensions
     const int batch = image.size(0);
@@ -186,10 +186,24 @@ torch::Tensor maxflow3d_cpu(const torch::Tensor &image, const torch::Tensor &pro
     const int depth = image.size(2);
     const int height = image.size(3);
     const int width = image.size(4);
-
-    const int Xoff[3] = {-1, 0, 0};
-    const int Yoff[3] = {0, -1, 0};
-    const int Zoff[3] = {0, 0, -1};
+    std::vector<int> Xoff, Yoff, Zoff;
+    int offsetLen;
+    if (connectivity == 1) {
+        Xoff = {-1, 0, 0};
+        Yoff = {0, -1, 0};
+        Zoff = {0, 0, -1};
+        offsetLen = 3;
+    }
+    else if (connectivity == 2) {
+        Xoff = {-1, 0, 0, -1, -1, 0,  -1};
+        Yoff = {0, -1, 0, -1,  0, -1, -1};
+        Zoff = {0, 0, -1,  0, -1, -1, -1};
+        offsetLen = 7;
+    }
+    else {
+        throw std::runtime_error(
+            "Library only supports 1 or 2 connectivity for 3D spatial inputs, received connectivity = " + std::to_string(connectivity) + ".");
+    };
 
     // prepare output
     torch::Tensor label = torch::zeros({batch, 1, depth, height, width}, image.dtype());
@@ -245,7 +259,7 @@ torch::Tensor maxflow3d_cpu(const torch::Tensor &image, const torch::Tensor &pro
                 }
 
                 pIndex = d * height * width + h * width + w;
-                for (int i = 0; i < 3; i++)
+                for (int i = 0; i < offsetLen; i++)
                 {
                     const int dn = d + Xoff[i];
                     const int hn = h + Yoff[i];
@@ -267,8 +281,9 @@ torch::Tensor maxflow3d_cpu(const torch::Tensor &image, const torch::Tensor &pro
                         {
                             qval_v[c_i] = image_ptr[0][c_i][dn][hn][wn];
                         }
-                        l2dis = l2distance(pval_v, qval_v);
+                        l2dis = l2distance(pval_v, qval_v); 
                     }
+                    l2dis = l2dis / sqrt(Xoff[i] * Xoff[i] + Yoff[i] * Yoff[i] + Zoff[i] * Zoff[i]);
                     n_weight = lambda * exp(-(l2dis * l2dis) / (2 * sigma * sigma));
                     qIndex = dn * height * width + hn * width + wn;
                     g.addEdges(qIndex, pIndex, n_weight, n_weight);

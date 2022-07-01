@@ -30,7 +30,7 @@
 #include "torchmaxflow.h"
 #include "common.h"
 
-torch::Tensor maxflow(const torch::Tensor &image, const torch::Tensor &prob, const float &lambda, const float &sigma)
+torch::Tensor maxflow(const torch::Tensor &image, const torch::Tensor &prob, const float &lambda, const float &sigma, const int &connectivity)
 {
     // could be 2D or 3D tensors of shapes
     // 2D: 1 x C x H x W  (4 dims)
@@ -46,7 +46,7 @@ torch::Tensor maxflow(const torch::Tensor &image, const torch::Tensor &prob, con
     // 3D case: 1 x C x D x H x W
     else if (num_dims == 5)
     {
-        return maxflow3d_cpu(image, prob, lambda, sigma);
+        return maxflow3d_cpu(image, prob, lambda, sigma, connectivity);
     }
     else
     {
@@ -55,7 +55,7 @@ torch::Tensor maxflow(const torch::Tensor &image, const torch::Tensor &prob, con
     }
 }
 
-torch::Tensor maxflow_interactive(const torch::Tensor &image, torch::Tensor &prob, const torch::Tensor &seed, const float &lambda, const float &sigma)
+torch::Tensor maxflow_interactive(const torch::Tensor &image, torch::Tensor &prob, const torch::Tensor &seed, const float &lambda, const float &sigma, const int &connectivity)
 {
     // check input dimensions
     // could be 2D or 3D tensors of shapes
@@ -75,7 +75,7 @@ torch::Tensor maxflow_interactive(const torch::Tensor &image, torch::Tensor &pro
     // 3D case: 1 x C x D x H x W
     else if (num_dims == 5)
     {
-        return maxflow3d_cpu(image, prob, lambda, sigma);
+        return maxflow3d_cpu(image, prob, lambda, sigma, connectivity);
     }
     else
     {

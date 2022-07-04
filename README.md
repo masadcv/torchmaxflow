@@ -48,7 +48,7 @@ Interactive maxflow2d
 ## Example usage
 
 The following demonstrates a simple example showing torchmaxflow usage:
-```
+```python
 image = np.asarray(Image.open('data/image2d.png').convert('L'), np.float32)
 image = torch.from_numpy(image).unsqueeze(0).unsqueeze(0)
 

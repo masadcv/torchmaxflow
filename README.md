@@ -1,5 +1,6 @@
 # torchmaxflow: Max-flow/Min-cut in PyTorch for 2D images and 3D volumes
 [![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
+<img src="https://img.shields.io/pypi/dm/torchmaxflow.svg?label=PyPI%20downloads&logo=python&logoColor=green"/>
 [![CI Build](https://github.com/masadcv/torchmaxflow/actions/workflows/build.yml/badge.svg)](https://github.com/masadcv/torchmaxflow/actions/workflows/build.yml)
 [![PyPI version](https://badge.fury.io/py/torchmaxflow.svg)](https://badge.fury.io/py/torchmaxflow)
 <img src="https://img.shields.io/badge/Python-3.6%20|%203.7%20|%203.8%20|%203.9-3776ab.svg"/>
@@ -48,7 +49,7 @@ Interactive maxflow2d
 ## Example usage
 
 The following demonstrates a simple example showing torchmaxflow usage:
-```
+```python
 image = np.asarray(Image.open('data/image2d.png').convert('L'), np.float32)
 image = torch.from_numpy(image).unsqueeze(0).unsqueeze(0)
 

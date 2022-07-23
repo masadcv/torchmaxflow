@@ -30,7 +30,7 @@
 #include "torchmaxflow.h"
 #include "common.h"
 
-torch::Tensor maxflow(const torch::Tensor &image, const torch::Tensor &prob, const float &lambda, const float &sigma)
+torch::Tensor maxflow(const torch::Tensor &image, const torch::Tensor &prob, const float &lambda, const float &sigma, const int &connectivity)
 {
     // could be 2D or 3D tensors of shapes
     // 2D: 1 x C x H x W  (4 dims)
@@ -41,12 +41,12 @@ torch::Tensor maxflow(const torch::Tensor &image, const torch::Tensor &prob, con
     // 2D case: 1 x C x H x W
     if (num_dims == 4)
     {
-        return maxflow2d_cpu(image, prob, lambda, sigma);
+        return maxflow2d_cpu(image, prob, lambda, sigma, connectivity);
     }
     // 3D case: 1 x C x D x H x W
     else if (num_dims == 5)
     {
-        return maxflow3d_cpu(image, prob, lambda, sigma);
+        return maxflow3d_cpu(image, prob, lambda, sigma, connectivity);
     }
     else
     {
@@ -55,7 +55,7 @@ torch::Tensor maxflow(const torch::Tensor &image, const torch::Tensor &prob, con
     }
 }
 
-torch::Tensor maxflow_interactive(const torch::Tensor &image, torch::Tensor &prob, const torch::Tensor &seed, const float &lambda, const float &sigma)
+torch::Tensor maxflow_interactive(const torch::Tensor &image, torch::Tensor &prob, const torch::Tensor &seed, const float &lambda, const float &sigma, const int &connectivity)
 {
     // check input dimensions
     // could be 2D or 3D tensors of shapes
@@ -70,12 +70,12 @@ torch::Tensor maxflow_interactive(const torch::Tensor &image, torch::Tensor &pro
     // 2D case: 1 x C x H x W
     if (num_dims == 4)
     {
-        return maxflow2d_cpu(image, prob, lambda, sigma);
+        return maxflow2d_cpu(image, prob, lambda, sigma, connectivity);
     }
     // 3D case: 1 x C x D x H x W
     else if (num_dims == 5)
     {
-        return maxflow3d_cpu(image, prob, lambda, sigma);
+        return maxflow3d_cpu(image, prob, lambda, sigma, connectivity);
     }
     else
     {
@@ -86,6 +86,10 @@ torch::Tensor maxflow_interactive(const torch::Tensor &image, torch::Tensor &pro
 
 PYBIND11_MODULE(TORCH_EXTENSION_NAME, m)
 {
-    m.def("maxflow", &maxflow, "Max-flow min-cut inference for 2D/3D tensors");
-    m.def("maxflow_interactive", &maxflow_interactive, "Max-flow min-cut inference for 2D/3D tensors with interactive input");
+    m.def("maxflow", &maxflow, "Max-flow min-cut inference for 2D/3D tensors", 
+        py::arg("image"), py::arg("prob"), py::arg("lambda"), py::arg("sigma"), py::arg("connectivity")=0
+    );
+    m.def("maxflow_interactive", &maxflow_interactive, "Max-flow min-cut inference for 2D/3D tensors with interactive input",
+        py::arg("image"), py::arg("prob"),  py::arg("seed"), py::arg("lambda"), py::arg("sigma"), py::arg("connectivity")=0
+    );
 }

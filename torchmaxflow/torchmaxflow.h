@@ -35,19 +35,25 @@ torch::Tensor maxflow2d_cpu(
     const torch::Tensor &image,
     const torch::Tensor &prob,
     const float &lambda,
-    const float &sigma);
+    const float &sigma,
+    const int &connectivity
+    );
 
 torch::Tensor maxflow3d_cpu(
     const torch::Tensor &image,
     const torch::Tensor &prob,
     const float &lambda,
-    const float &sigma);
+    const float &sigma,
+    const int &connectivity
+    );
 
 torch::Tensor maxflow(
     const torch::Tensor &image,
     const torch::Tensor &prob,
     const float &lambda,
-    const float &sigma);
+    const float &sigma,
+    const int &connectivity
+    );
 
 void add_interactive_seeds(
     torch::Tensor &prob, 

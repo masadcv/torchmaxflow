@@ -86,6 +86,10 @@ torch::Tensor maxflow_interactive(const torch::Tensor &image, torch::Tensor &pro
 
 PYBIND11_MODULE(TORCH_EXTENSION_NAME, m)
 {
-    m.def("maxflow", &maxflow, "Max-flow min-cut inference for 2D/3D tensors");
-    m.def("maxflow_interactive", &maxflow_interactive, "Max-flow min-cut inference for 2D/3D tensors with interactive input");
+    m.def("maxflow", &maxflow, "Max-flow min-cut inference for 2D/3D tensors", 
+        py::arg("image"), py::arg("prob"), py::arg("lambda"), py::arg("sigma"), py::arg("connectivity")=0
+    );
+    m.def("maxflow_interactive", &maxflow_interactive, "Max-flow min-cut inference for 2D/3D tensors with interactive input",
+        py::arg("image"), py::arg("prob"),  py::arg("seed"), py::arg("lambda"), py::arg("sigma"), py::arg("connectivity")=0
+    );
 }

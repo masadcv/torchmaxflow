@@ -81,7 +81,7 @@ torch::Tensor maxflow2d_cpu(const torch::Tensor &image, const torch::Tensor &pro
     std::vector<int> Xoff, Yoff;
 
     int offsetLen;
-    if (connectivity == 4) {
+    if ((connectivity == 4) || (connectivity == 0)) {
         Xoff = {-1, 0};
         Yoff = {0, -1};
         offsetLen = 2;
@@ -202,7 +202,7 @@ torch::Tensor maxflow3d_cpu(const torch::Tensor &image, const torch::Tensor &pro
     const int width = image.size(4);
     std::vector<int> Xoff, Yoff, Zoff;
     int offsetLen;
-    if (connectivity == 6) {
+    if ((connectivity == 6) || (connectivity == 0)) {
         Xoff = {-1, 0, 0};
         Yoff = {0, -1, 0};
         Zoff = {0, 0, -1};

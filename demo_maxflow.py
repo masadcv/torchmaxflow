@@ -22,7 +22,7 @@ def demo_maxflow():
     Prob = torch.from_numpy(Prob).unsqueeze(0)
 
     tic = time.time()
-    lab = np.squeeze(torchmaxflow.maxflow(Iq, Prob, lamda, sigma, 8).numpy())
+    lab = np.squeeze(torchmaxflow.maxflow(Iq, Prob, lamda, sigma).numpy())
     toc = time.time()
     print("Time taken: {}".format(toc-tic))
     
@@ -49,7 +49,7 @@ def demo_interactive_maxflow():
     Prob = torch.from_numpy(Prob).unsqueeze(0)
     Seed = torch.from_numpy(Seed).unsqueeze(0)
     tic = time.time()
-    lab = np.squeeze(torchmaxflow.maxflow_interactive(Iq, Prob, Seed, lamda, sigma, 8).numpy())
+    lab = np.squeeze(torchmaxflow.maxflow_interactive(Iq, Prob, Seed, lamda, sigma).numpy())
     toc = time.time()
     print("Time taken: {}".format(toc-tic))
 
@@ -84,7 +84,7 @@ def demo_maxflow3d():
     Prob = torch.from_numpy(Prob).unsqueeze(0)
 
     tic = time.time()
-    lab = np.squeeze(torchmaxflow.maxflow(img_data, Prob, lamda, sigma, 6).numpy())
+    lab = np.squeeze(torchmaxflow.maxflow(img_data, Prob, lamda, sigma).numpy())
     toc = time.time()
     print("Time taken: {}".format(toc-tic))
 
@@ -119,7 +119,7 @@ def test_interactive_max_flow3d():
     Prob = torch.from_numpy(Prob).unsqueeze(0)
     Seed = torch.from_numpy(Seed).unsqueeze(0)
     tic = time.time()
-    lab = np.squeeze(torchmaxflow.maxflow_interactive(img_data, Prob, Seed, lamda, sigma, 6).numpy())
+    lab = np.squeeze(torchmaxflow.maxflow_interactive(img_data, Prob, Seed, lamda, sigma).numpy())
     toc = time.time()
     print("Time taken: {}".format(toc-tic))
     lab_obj = sitk.GetImageFromArray(lab)

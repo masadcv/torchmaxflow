@@ -41,7 +41,7 @@ torch::Tensor maxflow(const torch::Tensor &image, const torch::Tensor &prob, con
     // 2D case: 1 x C x H x W
     if (num_dims == 4)
     {
-        return maxflow2d_cpu(image, prob, lambda, sigma);
+        return maxflow2d_cpu(image, prob, lambda, sigma, connectivity);
     }
     // 3D case: 1 x C x D x H x W
     else if (num_dims == 5)
@@ -70,7 +70,7 @@ torch::Tensor maxflow_interactive(const torch::Tensor &image, torch::Tensor &pro
     // 2D case: 1 x C x H x W
     if (num_dims == 4)
     {
-        return maxflow2d_cpu(image, prob, lambda, sigma);
+        return maxflow2d_cpu(image, prob, lambda, sigma, connectivity);
     }
     // 3D case: 1 x C x D x H x W
     else if (num_dims == 5)

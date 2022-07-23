@@ -71,17 +71,30 @@ float l2distance(const std::vector<float> &in1, const std::vector<float> &in2)
     return std::sqrt(ret_sum);
 }
 
-torch::Tensor maxflow2d_cpu(const torch::Tensor &image, const torch::Tensor &prob, const float &lambda, const float &sigma)
+torch::Tensor maxflow2d_cpu(const torch::Tensor &image, const torch::Tensor &prob, const float &lambda, const float &sigma, const int &connectivity)
 {
     // get input dimensions
     const int batch = image.size(0);
     const int channel = image.size(1);
     const int height = image.size(2);
     const int width = image.size(3);
+    std::vector<int> Xoff, Yoff;
 
-    const int Xoff[2] = {-1, 0};
-    const int Yoff[2] = {0, -1};
-
+    int offsetLen;
+    if (connectivity == 4) {
+        Xoff = {-1, 0};
+        Yoff = {0, -1};
+        offsetLen = 2;
+    }
+    else if (connectivity == 8) {
+        Xoff = {-1, 0, -1};
+        Yoff = {0, -1, -1};
+        offsetLen = 3;
+    }
+    else {
+        throw std::runtime_error(
+            "Library only supports 4 or 8 connectivity for 2D spatial inputs, received connectivity = " + std::to_string(connectivity) + ".");
+    };
     // prepare output
     torch::Tensor label = torch::zeros({batch, 1, height, width}, image.dtype());
 
@@ -132,7 +145,7 @@ torch::Tensor maxflow2d_cpu(const torch::Tensor &image, const torch::Tensor &pro
             }
 
             pIndex = h * width + w;
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < offsetLen; i++)
             {
                 const int hn = h + Xoff[i];
                 const int wn = w + Yoff[i];
@@ -155,6 +168,7 @@ torch::Tensor maxflow2d_cpu(const torch::Tensor &image, const torch::Tensor &pro
                     }
                     l2dis = l2distance(pval_v, qval_v);
                 }
+                l2dis /= sqrt(Xoff[i] * Xoff[i] + Yoff[i] * Yoff[i]);
                 n_weight = lambda * exp(-(l2dis * l2dis) / (2 * sigma * sigma));
                 qIndex = hn * width + wn;
                 g.addEdges(qIndex, pIndex, n_weight, n_weight);
@@ -188,13 +202,19 @@ torch::Tensor maxflow3d_cpu(const torch::Tensor &image, const torch::Tensor &pro
     const int width = image.size(4);
     std::vector<int> Xoff, Yoff, Zoff;
     int offsetLen;
-    if (connectivity == 1) {
+    if (connectivity == 6) {
         Xoff = {-1, 0, 0};
         Yoff = {0, -1, 0};
         Zoff = {0, 0, -1};
         offsetLen = 3;
     }
-    else if (connectivity == 2) {
+    else if (connectivity == 18) {
+        Xoff = {-1, 0, 0, -1, -1, 0};
+        Yoff = {0, -1, 0, -1,  0, -1};
+        Zoff = {0, 0, -1,  0, -1, -1};
+        offsetLen = 6;
+    }
+    else if (connectivity == 26) {
         Xoff = {-1, 0, 0, -1, -1, 0,  -1};
         Yoff = {0, -1, 0, -1,  0, -1, -1};
         Zoff = {0, 0, -1,  0, -1, -1, -1};
@@ -202,7 +222,7 @@ torch::Tensor maxflow3d_cpu(const torch::Tensor &image, const torch::Tensor &pro
     }
     else {
         throw std::runtime_error(
-            "Library only supports 1 or 2 connectivity for 3D spatial inputs, received connectivity = " + std::to_string(connectivity) + ".");
+            "Library only supports 6, 18 or 26 connectivity for 3D spatial inputs, received connectivity = " + std::to_string(connectivity) + ".");
     };
 
     // prepare output
@@ -283,7 +303,7 @@ torch::Tensor maxflow3d_cpu(const torch::Tensor &image, const torch::Tensor &pro
                         }
                         l2dis = l2distance(pval_v, qval_v); 
                     }
-                    l2dis = l2dis / sqrt(Xoff[i] * Xoff[i] + Yoff[i] * Yoff[i] + Zoff[i] * Zoff[i]);
+                    l2dis /= sqrt(Xoff[i] * Xoff[i] + Yoff[i] * Yoff[i] + Zoff[i] * Zoff[i]);
                     n_weight = lambda * exp(-(l2dis * l2dis) / (2 * sigma * sigma));
                     qIndex = dn * height * width + hn * width + wn;
                     g.addEdges(qIndex, pIndex, n_weight, n_weight);

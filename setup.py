@@ -99,7 +99,7 @@ def get_extensions():
 
     ext_modules = [
         extension(
-            name="torchmaxflow",
+            name="torchmaxflowcpp",
             sources=sources,
             include_dirs=include_dirs,
             define_macros=define_macros,
@@ -120,13 +120,13 @@ with open("requirements.txt", "r") as fp:
 
 setup(
     name="torchmaxflow",
-    version="0.0.6rc1",
+    version="0.0.6rc2",
     description="torchmaxflow: Max-flow/Min-cut in PyTorch for 2D images and 3D volumes",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/masadcv/torchmaxflow",
     author="Muhammad Asad",
-    author_email="muhammad.asad@kcl.ac.uk",
+    author_email="masadcv@gmail.com",
     license="BSD-3-Clause License",
     classifiers=[
         "License :: OSI Approved :: BSD License",

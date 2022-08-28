@@ -80,7 +80,7 @@ def maxflow(
         sigma: standard deviation of intensity values in neighbourhood.
         connectivity: connectivity to use, can be from [4, 8] for 2D and [6, 18, 24] for 3D
     Returns:
-        torch.Tensor with distance transform
+        torch.Tensor with maxflow output
     """
     return torchmaxflowcpp.maxflow(
         image, prob, lamda, sigma, connectivity
@@ -109,7 +109,7 @@ def maxflow_interactive(
         sigma: standard deviation of intensity values in neighbourhood.
         connectivity: connectivity to use, can be from [4, 8] for 2D and [6, 18, 24] for 3D
     Returns:
-        torch.Tensor with distance transform
+        torch.Tensor with maxflow output
     """
     return torchmaxflowcpp.maxflow_interactive(
         image, prob, seed, lamda, sigma, connectivity

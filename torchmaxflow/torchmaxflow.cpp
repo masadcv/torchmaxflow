@@ -51,7 +51,7 @@ torch::Tensor maxflow(const torch::Tensor &image, const torch::Tensor &prob, con
     else
     {
         throw std::runtime_error(
-            "Library only supports 2D or 3D spatial inputs, received " + std::to_string(num_dims - 2) + "D inputs");
+            "torchmaxflow only supports 2D or 3D spatial inputs, received " + std::to_string(num_dims - 2) + "D inputs");
     }
 }
 
@@ -80,7 +80,7 @@ torch::Tensor maxflow_interactive(const torch::Tensor &image, torch::Tensor &pro
     else
     {
         throw std::runtime_error(
-            "Library only supports 2D or 3D spatial inputs, received " + std::to_string(num_dims - 2) + "D inputs");
+            "torchmaxflow only supports 2D or 3D spatial inputs, received " + std::to_string(num_dims - 2) + "D inputs");
     }
 }
 

@@ -17,12 +17,13 @@ def demo_maxflow():
     Prob = np.asarray([bP, fP])
     lamda = 20.0  
     sigma = 10.0
+    connectivity = 4
 
     Iq = torch.from_numpy(Iq).unsqueeze(0).unsqueeze(0)
     Prob = torch.from_numpy(Prob).unsqueeze(0)
 
     tic = time.time()
-    lab = np.squeeze(torchmaxflow.maxflow(Iq, Prob, lamda, sigma).numpy())
+    lab = np.squeeze(torchmaxflow.maxflow(Iq, Prob, lamda, sigma, connectivity).numpy())
     toc = time.time()
     print("Time taken: {}".format(toc-tic))
     
@@ -45,11 +46,13 @@ def demo_interactive_maxflow():
 
     lamda = 30.0  
     sigma = 8.0
+    connectivity = 4
+
     Iq = torch.from_numpy(Iq).unsqueeze(0).unsqueeze(0)
     Prob = torch.from_numpy(Prob).unsqueeze(0)
     Seed = torch.from_numpy(Seed).unsqueeze(0)
     tic = time.time()
-    lab = np.squeeze(torchmaxflow.maxflow_interactive(Iq, Prob, Seed, lamda, sigma).numpy())
+    lab = np.squeeze(torchmaxflow.maxflow_interactive(Iq, Prob, Seed, lamda, sigma, connectivity).numpy())
     toc = time.time()
     print("Time taken: {}".format(toc-tic))
 
@@ -79,12 +82,13 @@ def demo_maxflow3d():
 
     lamda = 10.0
     sigma = 15.0
+    connectivity = 6
 
     img_data = torch.from_numpy(img_data).unsqueeze(0).unsqueeze(0)
     Prob = torch.from_numpy(Prob).unsqueeze(0)
 
     tic = time.time()
-    lab = np.squeeze(torchmaxflow.maxflow(img_data, Prob, lamda, sigma).numpy())
+    lab = np.squeeze(torchmaxflow.maxflow(img_data, Prob, lamda, sigma, connectivity).numpy())
     toc = time.time()
     print("Time taken: {}".format(toc-tic))
 
@@ -115,11 +119,13 @@ def test_interactive_max_flow3d():
 
     lamda = 10.0
     sigma = 15.0
+    connectivity = 6
+
     img_data = torch.from_numpy(img_data).unsqueeze(0).unsqueeze(0)
     Prob = torch.from_numpy(Prob).unsqueeze(0)
     Seed = torch.from_numpy(Seed).unsqueeze(0)
     tic = time.time()
-    lab = np.squeeze(torchmaxflow.maxflow_interactive(img_data, Prob, Seed, lamda, sigma).numpy())
+    lab = np.squeeze(torchmaxflow.maxflow_interactive(img_data, Prob, Seed, lamda, sigma, connectivity).numpy())
     toc = time.time()
     print("Time taken: {}".format(toc-tic))
     lab_obj = sitk.GetImageFromArray(lab)

@@ -78,22 +78,31 @@ torch::Tensor maxflow2d_cpu(const torch::Tensor &image, const torch::Tensor &pro
     const int channel = image.size(1);
     const int height = image.size(2);
     const int width = image.size(3);
-    std::vector<int> Xoff, Yoff;
 
+    std::vector<int> Xoff, Yoff;
     int offsetLen;
-    if ((connectivity == 4) || (connectivity == 0)) {
-        Xoff = {-1, 0};
-        Yoff = {0, -1};
+
+    if (connectivity == 0)
+    {
+        std::cout << "torchmaxflow: warning no connectivity provided, falling back to default 4 connectivity" << std::endl;
+    }
+
+    if ((connectivity == 4) || (connectivity == 0)) 
+    {
+        Xoff = {-1,  0};
+        Yoff =  {0, -1};
         offsetLen = 2;
     }
-    else if (connectivity == 8) {
-        Xoff = {-1, 0, -1};
-        Yoff = {0, -1, -1};
+    else if (connectivity == 8) 
+    {
+        Xoff = {-1,  0, -1};
+        Yoff = { 0, -1, -1};
         offsetLen = 3;
     }
-    else {
+    else 
+    {
         throw std::runtime_error(
-            "Library only supports 4 or 8 connectivity for 2D spatial inputs, received connectivity = " + std::to_string(connectivity) + ".");
+            "torchmaxflow only supports 4 or 8 connectivity for 2D spatial inputs, received connectivity = " + std::to_string(connectivity) + ".");
     };
     // prepare output
     torch::Tensor label = torch::zeros({batch, 1, height, width}, image.dtype());
@@ -200,29 +209,41 @@ torch::Tensor maxflow3d_cpu(const torch::Tensor &image, const torch::Tensor &pro
     const int depth = image.size(2);
     const int height = image.size(3);
     const int width = image.size(4);
+
     std::vector<int> Xoff, Yoff, Zoff;
     int offsetLen;
-    if ((connectivity == 6) || (connectivity == 0)) {
-        Xoff = {-1, 0, 0};
-        Yoff = {0, -1, 0};
-        Zoff = {0, 0, -1};
+        
+    if(connectivity == 0)
+    {
+        // no connectivity provided, issue warning and use default connectivity
+        std::cout << "torchmaxflow: warning no connectivity provided, falling back to default 6 connectivity" << std::endl;
+    }
+
+    if ((connectivity == 6) || (connectivity == 0)) 
+    {
+        Xoff = {-1,  0,  0};
+        Yoff = { 0, -1,  0};
+        Zoff = { 0,  0, -1};
         offsetLen = 3;
     }
-    else if (connectivity == 18) {
-        Xoff = {-1, 0, 0, -1, -1, 0};
-        Yoff = {0, -1, 0, -1,  0, -1};
-        Zoff = {0, 0, -1,  0, -1, -1};
+    else if (connectivity == 18) 
+    {
+        Xoff = {-1,  0,  0, -1, -1,  0};
+        Yoff = { 0, -1,  0, -1,  0, -1};
+        Zoff = { 0,  0, -1,  0, -1, -1};
         offsetLen = 6;
     }
-    else if (connectivity == 26) {
-        Xoff = {-1, 0, 0, -1, -1, 0,  -1};
-        Yoff = {0, -1, 0, -1,  0, -1, -1};
-        Zoff = {0, 0, -1,  0, -1, -1, -1};
+    else if (connectivity == 26) 
+    {
+        Xoff = {-1,  0,  0, -1, -1,  0, -1};
+        Yoff = { 0, -1,  0, -1,  0, -1, -1};
+        Zoff = { 0,  0, -1,  0, -1, -1, -1};
         offsetLen = 7;
     }
-    else {
+    else 
+    {
         throw std::runtime_error(
-            "Library only supports 6, 18 or 26 connectivity for 3D spatial inputs, received connectivity = " + std::to_string(connectivity) + ".");
+            "torchmaxflow only supports 6, 18 or 26 connectivity for 3D spatial inputs, received connectivity = " + std::to_string(connectivity) + ".");
     };
 
     // prepare output

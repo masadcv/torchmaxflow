@@ -12,6 +12,7 @@ Pytorch-based implementation of Max-flow/Min-cut based on the following paper:
 
 If you want same functionality in Numpy, then consider [Numpy-based implementation](https://github.com/masadcv/numpymaxflow)
 
+> Current release of torchmaxflow does not provide GPU implementation of maxflow
 
 ## Citation
 If you use this code in your research, then please consider citing:
